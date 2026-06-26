@@ -1,0 +1,89 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "cr": "http://mlcommons.org/croissant/",
+    "sc": "https://schema.org/"
+  },
+  "@type": "sc:Dataset",
+  "name": "wildlifebench-gbif-ebbe-2026-speciesnet-overlap",
+  "description": "WildlifeBench GBIF Ebbe Nielsen 2026 camera-trap package filtered to the final SpeciesNet v4.0.3b classifier-label and country-geofence overlap, with neutral model input IDs, isolated ground truth, CamtrapDP companion tables and per-media attribution.",
+  "version": "gbif_award_speciesnet_overlap_20260626",
+  "license": "Per-media licences recorded in attribution.jsonl",
+  "url": "https://github.com/jonathanlyardley/WildlifeBench",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "model_inputs",
+      "name": "model_inputs/events.jsonl",
+      "contentUrl": "model_inputs/events.jsonl",
+      "encodingFormat": "application/jsonl"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "answer_key",
+      "name": "ground_truth/answer_key.jsonl",
+      "contentUrl": "ground_truth/answer_key.jsonl",
+      "encodingFormat": "application/jsonl"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "attribution",
+      "name": "attribution.jsonl",
+      "contentUrl": "attribution.jsonl",
+      "encodingFormat": "application/jsonl"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "name": "events",
+      "description": "Model-facing events with neutral IDs and no ground-truth taxon labels.",
+      "data": {
+        "@id": "model_inputs"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "name": "event_id",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "country_code",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "n_frames",
+          "dataType": "sc:Integer"
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "name": "ground_truth",
+      "description": "Isolated answer key for no-cost review scoring.",
+      "data": {
+        "@id": "answer_key"
+      },
+      "field": [
+        {
+          "@type": "cr:Field",
+          "name": "event_id",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "taxonomy",
+          "dataType": "cr:JSON"
+        }
+      ]
+    }
+  ],
+  "releaseSummary": {
+    "included_events": 246,
+    "included_species": 82,
+    "media_rows": 2010,
+    "headline_scope": "speciesnet_v403b_geo_supported_overlap"
+  }
+}

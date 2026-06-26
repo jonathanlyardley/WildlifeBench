@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+title: WildlifeBench GBIF Ebbe Nielsen 2026 SpeciesNet-Overlap Review Package
+message: Cite this release when referring to the submitted SpeciesNet-overlap review package.
+authors:
+  - family-names: Yardley
+    given-names: Jonathan
+date-released: 2026-06-26
+version: gbif-ebbe-2026-speciesnet-overlap-staging
+url: https://github.com/jonathanlyardley/WildlifeBench

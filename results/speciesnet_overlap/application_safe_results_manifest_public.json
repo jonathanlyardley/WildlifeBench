@@ -1,0 +1,39 @@
+{
+  "schema_version": "wildlifebench.gbif_application_results.v1",
+  "generated": "2026-06-26",
+  "presentation_scope": "speciesnet_v403b_geo_supported_overlap",
+  "filter_basis": {
+    "speciesnet_model_id": "kaggle:google/speciesnet/pyTorch/v4.0.3b/1",
+    "taxonomy_file_basename": "taxonomy_release.20260609.txt",
+    "taxonomy_sha256": "4bd5d1a85a63857f557d487c5d86c0911173c59b34977ebc0ee909484ce277f2",
+    "classifier_label_file_basename": "full_image_88545560_22x8_v12_epoch_00153.labels.20260609.txt",
+    "classifier_label_sha256": "e0c41415d9b29dfd6d2e2494205d1197d28595cc6f69cb129495f9827155547e",
+    "geofence_file_basename": "geofence_release.20260609.json",
+    "geofence_sha256": "27a88e932e411f73a4937c935fe36cf61a9060a1c488f4c69ade3f19eb8507d1",
+    "rule": "include an event only when its ground-truth species appears in SpeciesNet v4.0.3b classifier labels and is allowed by the SpeciesNet country geofence for that event"
+  },
+  "source_event_count": 246,
+  "source_species_count": 82,
+  "included_event_count": 246,
+  "included_species_count": 82,
+  "included_bird_species_count": 40,
+  "excluded_event_count": 0,
+  "excluded_species_count": 0,
+  "exclusion_reason_counts": {},
+  "source_records": [],
+  "outputs": {
+    "headline_csv": "results/speciesnet_overlap/application_safe_results.csv",
+    "headline_md": "results/speciesnet_overlap/application_safe_results.md",
+    "event_predictions_csv": "results/speciesnet_overlap/application_safe_results_events.csv",
+    "included_events_csv": "results/speciesnet_overlap/application_safe_speciesnet_overlap_included_events.csv",
+    "included_species_csv": "results/speciesnet_overlap/application_safe_speciesnet_overlap_included_species.csv",
+    "included_birds_csv": "results/speciesnet_overlap/application_safe_speciesnet_overlap_included_birds.csv",
+    "manifest_json": "results/speciesnet_overlap/application_safe_results_manifest.json"
+  },
+  "notes": [
+    "Raw full-run output files are not redistributed in this SpeciesNet-overlap-only staging package.",
+    "BioCLIP 2.5 is retained as a caveated custom-label comparator; it does not use a native SpeciesNet-style deployed classifier list.",
+    "SpeciesNet v4.0.3a rows remain audit context rather than headline rows for this application-safe table."
+  ],
+  "source_records_note": "Raw full-run output records are not redistributed in this SpeciesNet-overlap-only public staging package; aggregate and event-level SpeciesNet-overlap result rows are retained."
+}

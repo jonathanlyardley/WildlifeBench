@@ -1,0 +1,8 @@
+deploymentID,locationID,locationName,latitude,longitude,coordinateUncertainty,deploymentStart,deploymentEnd,setupBy,datasetKey,datasetName
+WBGBIF2026_D_BEL_c9cbc586,BEL_dataset_c9cbc586,Belgium,,,,,,"WildlifeBench release package, derived from GBIF-mediated source metadata",c9cbc586-660e-4d89-ba14-0000c5770de1,GMU8_LEUVEN - Camera trap observations in natural habitats south of Leuven (Belgium)
+WBGBIF2026_D_DEU_273ee7a0,DEU_dataset_273ee7a0,Germany,,,,,,"WildlifeBench release package, derived from GBIF-mediated source metadata",273ee7a0-4b59-4350-b220-3282b533ecde,Luxembourg national monitoring (valerian) 2020-2022
+WBGBIF2026_D_ECU_68f49e46,ECU_dataset_68f49e46,Ecuador,,,,,,"WildlifeBench release package, derived from GBIF-mediated source metadata",68f49e46-9480-41dc-a51c-f600bb9a5f60,Paisaje Jaguar Test
+WBGBIF2026_D_FRA_273ee7a0,FRA_dataset_273ee7a0,France,,,,,,"WildlifeBench release package, derived from GBIF-mediated source metadata",273ee7a0-4b59-4350-b220-3282b533ecde,Luxembourg national monitoring (valerian) 2020-2022
+WBGBIF2026_D_LUX_1290a78f,LUX_dataset_1290a78f,Luxembourg,,,,,,"WildlifeBench release package, derived from GBIF-mediated source metadata",1290a78f-098c-4336-84e4-74de27a658f1,Luxembourg farmland bird survey 2020 - 2024
+WBGBIF2026_D_LUX_273ee7a0,LUX_dataset_273ee7a0,Luxembourg,,,,,,"WildlifeBench release package, derived from GBIF-mediated source metadata",273ee7a0-4b59-4350-b220-3282b533ecde,Luxembourg national monitoring (valerian) 2020-2022
+WBGBIF2026_D_LUX_fc3f505a,LUX_dataset_fc3f505a,Luxembourg,,,,,,"WildlifeBench release package, derived from GBIF-mediated source metadata",fc3f505a-05d8-4b3e-908c-8880fc9899f7,Luxembourg national monitoring (valerian) 2023-2025

@@ -1,0 +1,37 @@
+{
+  "profile": "camtrap-dp",
+  "name": "wildlifebench-gbif-ebbe-2026-speciesnet-overlap",
+  "id": "gbif_award_speciesnet_overlap_20260626",
+  "title": "WildlifeBench GBIF Ebbe Nielsen 2026 SpeciesNet-overlap camera-trap package",
+  "description": "Camera-trap event package filtered to the final SpeciesNet v4.0.3b classifier-label and country-geofence overlap used for award-facing comparison. Coordinates are omitted; media are EXIF-stripped derivatives.",
+  "created": "2026-06-26T15:23:53Z",
+  "contributors": [
+    {
+      "title": "Jonathan Yardley",
+      "role": "creator"
+    }
+  ],
+  "licenses": [
+    {
+      "name": "per-media-licence",
+      "path": "../attribution.jsonl"
+    }
+  ],
+  "resources": [
+    {
+      "name": "deployments",
+      "path": "deployments.csv",
+      "profile": "tabular-data-resource"
+    },
+    {
+      "name": "media",
+      "path": "media.csv",
+      "profile": "tabular-data-resource"
+    },
+    {
+      "name": "observations",
+      "path": "observations.csv",
+      "profile": "tabular-data-resource"
+    }
+  ]
+}
