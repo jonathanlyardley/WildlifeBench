@@ -27,8 +27,8 @@
   "links": {
     "github": "https://github.com/jonathanlyardley/WildlifeBench",
     "github_status": "private staging branch live - to be made public after final release checks",
-    "huggingface_dataset": "https://huggingface.co/datasets/jonathanlyardley/wildlifebench-gbif-ebbe-2026-data",
-    "huggingface_status": "target not yet created/uploaded - blocked pending HF namespace confirmation; keep private when created"
+    "huggingface_dataset": "https://huggingface.co/datasets/JonathanYardley/wildlifebench-gbif-ebbe-2026-data",
+    "huggingface_status": "private staging - to be made public after final release checks"
   },
   "notes": [
     "Public model input IDs and filenames are neutral.",

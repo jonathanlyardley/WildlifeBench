@@ -11,4 +11,4 @@ This is the local private-staging upload package prepared for Hugging Face Datas
 - The isolated answer key under `ground_truth/` is retained for no-cost review scoring.
 - Media are EXIF-stripped and retain per-media GBIF attribution, rights-holder, licence URL and checksum metadata.
 
-- HF upload status: pending namespace confirmation for `jonathanlyardley/wildlifebench-gbif-ebbe-2026-data`; keep private when created.
+- HF upload status: private staging at `JonathanYardley/wildlifebench-gbif-ebbe-2026-data`; to be made public only after final release checks.
