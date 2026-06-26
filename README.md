@@ -5,7 +5,7 @@ This is a clean review scaffold for the GBIF Ebbe Nielsen Challenge submission. 
 ## Practical summary
 
 - GitHub staging URL: https://github.com/jonathanlyardley/WildlifeBench (private staging - to be made public after final release checks).
-- Hugging Face dataset staging URL: https://huggingface.co/datasets/jonathanlyardley/wildlifebench-gbif-ebbe-2026-data (private staging - to be made public after final release checks).
+- Hugging Face dataset target URL: https://huggingface.co/datasets/jonathanlyardley/wildlifebench-gbif-ebbe-2026-data (creation/upload pending HF namespace confirmation; keep private when created).
 - Final award-facing dataset in this release copy: 246 camera-trap bursts / 82 species in the SpeciesNet v4.0.3b classifier-label and country-geofence overlap.
 - Media package: 2,010 cropped/uncropped JPEG derivatives with per-media attribution, licence URLs, EXIF-stripping notes and checksums.
 - Excluded non-overlap events from the earlier 330-event development snapshot are not redistributed in this staging package.

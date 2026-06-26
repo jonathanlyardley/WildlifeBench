@@ -5,7 +5,7 @@ WildlifeBench tests complete AI-assisted camera-trap labelling routes on GBIF-me
 Staged links:
 
 - GitHub: https://github.com/jonathanlyardley/WildlifeBench (private staging - to be made public after final release checks).
-- Hugging Face dataset: https://huggingface.co/datasets/jonathanlyardley/wildlifebench-gbif-ebbe-2026-data (private staging - to be made public after final release checks).
+- Hugging Face dataset target: https://huggingface.co/datasets/jonathanlyardley/wildlifebench-gbif-ebbe-2026-data (creation/upload pending HF namespace confirmation; keep private when created).
 
 ## Evidence layers
 
