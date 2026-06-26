@@ -1,0 +1,201 @@
+{
+  "schema_version": "wildlifebench.run_manifest.v1",
+  "run_id": "proto_qwen3-vl-30b_1.2-conf-cal-bp47-no-descriptive-taxon_iterbp47-no-descriptive-taxon-full-20260612_20260612_190937",
+  "run_type": "llm_inference",
+  "created_at": "2026-06-12T18:09:37Z",
+  "started_at": "2026-06-12T17:27:07Z",
+  "completed_at": "2026-06-12T18:09:37Z",
+  "model": {
+    "model_key": "qwen3-vl-30b",
+    "api_model": "qwen/qwen3-vl-30b-a3b-instruct",
+    "reported_model_identifier": "qwen/qwen3-vl-30b-a3b-instruct",
+    "provider_version_pin": null,
+    "provider": "openrouter",
+    "family": "qwen",
+    "description": "Council Member - Qwen 3 VL 30B-A3B via OpenRouter. Promoted from observer to voting council member 2026-05-06 (replaces gemma-3-27b after Google sunsetted it). MoE (30B total / 3B active), 131K context, 20-image limit on OpenRouter. $0.13 in / $0.52 out per M tokens. Prototype OpenRouter route pre-resizes images to 1280 long-edge for cost, latency, and comparability; this is not a hard API cap."
+  },
+  "api_route": {
+    "provider": "openrouter",
+    "backend": "openrouter_chat_completions",
+    "api_model": "qwen/qwen3-vl-30b-a3b-instruct",
+    "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+    "transport": "OpenAI-compatible chat completions with base64 image URLs",
+    "provider_pin": null
+  },
+  "prompt": {
+    "version": "1.2-conf-cal-bp47-no-descriptive-taxon",
+    "template_sha256": "ca6a168ce409fc10786b2095705640a7f84a1ab4bd87789a4670f1bf48f2a1f1",
+    "full_prompt_example_sha256": "de5146bdd413e784f6cd95a8cf2928191f0092c1f66c283aa3f5a65c099c967e",
+    "abstention_suffix_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "dataset": {
+    "dataset_dir": "data_package/model_inputs",
+    "dataset_fingerprint": {
+      "n_events": 330,
+      "n_frames": 1278,
+      "fingerprint_sha256": "ea6f1b4190be45506ea921fd96f30f595f4a3d1fbcb0a4f0e7cbd2362737b368"
+    }
+  },
+  "image_resolution": {
+    "policy": "1280px long-edge resize before OpenRouter upload",
+    "scope": "prototype iteration / OpenRouter Qwen path",
+    "details": "providers/openrouter_provider.py resizes to JPEG quality 90 before base64 encoding."
+  },
+  "decoding": {
+    "mode": "not_recorded",
+    "temperature": 0,
+    "top_p": 1.0,
+    "top_k": null,
+    "max_output_tokens": 1000,
+    "candidate_count": null
+  },
+  "run_parameters": {
+    "per_species_limit": null,
+    "difficulty": null,
+    "iter_num": "bp47-no-descriptive-taxon-full-20260612",
+    "skip_ids_count": 0,
+    "temperature": 0,
+    "top_p": 1.0,
+    "max_tokens": 1000,
+    "truncation_retry_max": 2,
+    "truncation_token_threshold": 60,
+    "partial": false,
+    "n_complete": 330,
+    "n_events_total": 330
+  },
+  "usage": {
+    "input_tokens": 1432624,
+    "output_tokens": 39474,
+    "total_tokens": 1472098,
+    "provider_request_ids": []
+  },
+  "cost": {
+    "total_usd": null,
+    "source": "not_available_locally",
+    "note": "Langfuse may infer cost from trace usage when configured; local manifest does not invent prices."
+  },
+  "trace": {
+    "langfuse": {
+      "enabled": true,
+      "trace_id": "c48feb9a5b99e22894fe6cab46332760",
+      "trace_url": "https://cloud.langfuse.com/project/cmoua1qeo006qad07hsgo5cuv/traces/c48feb9a5b99e22894fe6cab46332760"
+    }
+  },
+  "environment": {
+    "omitted_from_public_release": true,
+    "reason": "Raw runner environment and dirty-tree status were removed from the public review package."
+  },
+  "raw_result_files": [
+    {
+      "path": "results/full_proto330/proto_qwen3-vl-30b_1.2-conf-cal-bp47-no-descriptive-taxon_iterbp47-no-descriptive-taxon-full-20260612_20260612_190937.json",
+      "exists": true,
+      "bytes": 586218,
+      "sha256": "25272d3570b025b3ac4796d6f2a17c8536703dcb0b6649c02d8e1a4452f99c90"
+    }
+  ],
+  "extra": {
+    "output_json_contains_prompt_template": true,
+    "output_json_contains_full_prompt_example": true
+  },
+  "reporting_checklist": {
+    "schema_version": "wildlifebench.api_row_reporting_checklist.v1",
+    "scope": "api_system_row",
+    "audit_grade": "provisional",
+    "missing_required": [
+      "decoding_mode"
+    ],
+    "checks": {
+      "run_id": {
+        "required": true,
+        "present": true,
+        "detail": "Stable local run identifier."
+      },
+      "timestamps": {
+        "required": true,
+        "present": true,
+        "detail": "Started/completed/manifest-created timestamps are recorded."
+      },
+      "local_result_file_hash": {
+        "required": true,
+        "present": true,
+        "detail": "Local result JSON path, byte size, and SHA-256 are recorded."
+      },
+      "dataset_fingerprint": {
+        "required": true,
+        "present": true,
+        "detail": "Dataset event/frame fingerprint is recorded."
+      },
+      "model_identifier": {
+        "required": true,
+        "present": true,
+        "detail": "Model key and provider API model identifier are recorded."
+      },
+      "model_version_or_alias_pin": {
+        "required": true,
+        "present": true,
+        "detail": "Provider-specific immutable pin when available, otherwise the exact reported API model alias."
+      },
+      "provider_route": {
+        "required": true,
+        "present": true,
+        "detail": "Provider, backend, endpoint, and image/text transport are recorded."
+      },
+      "prompt_hashes": {
+        "required": true,
+        "present": true,
+        "detail": "Prompt template, concrete example, and suffix hashes are recorded."
+      },
+      "generation_parameters": {
+        "required": true,
+        "present": true,
+        "detail": "Generation/run parameters are recorded."
+      },
+      "decoding_mode": {
+        "required": true,
+        "present": false,
+        "detail": "Decoding mode is explicitly named rather than inferred later."
+      },
+      "image_policy": {
+        "required": true,
+        "present": true,
+        "detail": "Image resolution/preprocessing policy is recorded."
+      },
+      "token_usage": {
+        "required": false,
+        "present": true,
+        "detail": "Token usage is recorded where provider telemetry exposes it."
+      },
+      "cost_slot": {
+        "required": false,
+        "present": true,
+        "detail": "Cost source is recorded, including explicit not-available status."
+      },
+      "trace_reference": {
+        "required": false,
+        "present": true,
+        "detail": "Langfuse trace reference slot is recorded even when tracing is disabled."
+      },
+      "environment_git": {
+        "required": true,
+        "present": true,
+        "detail": "Git commit and branch are recorded."
+      },
+      "environment_runtime": {
+        "required": true,
+        "present": true,
+        "detail": "Python/runtime package environment is recorded."
+      },
+      "uv_lock": {
+        "required": false,
+        "present": true,
+        "detail": "uv.lock provenance slot is recorded."
+      },
+      "error_retry_policy": {
+        "required": false,
+        "present": false,
+        "detail": "Retry/error policy or retry summary is recorded when available."
+      }
+    },
+    "note": "This checklist supports API-row reporting only; agent-system and specialist-baseline rows remain separate measurands."
+  }
+}

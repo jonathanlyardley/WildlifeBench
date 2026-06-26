@@ -8,7 +8,7 @@ Generated: 2026-06-26
 - Included in the presentation slice: 246 events / 82 species.
 - Inclusion rule: the ground-truth species must be in the local SpeciesNet v4.0.3b classifier labels and allowed by the SpeciesNet country geofence for that event.
 - Excluded non-overlap events from the earlier development snapshot are not redistributed in this staging package.
-- Raw full-run output files are not redistributed; aggregate and event-level SpeciesNet-overlap rows are retained.
+- Raw per-event model outputs restricted to the 246-event SpeciesNet-overlap slice are included under `results/run_outputs/`; the 84 non-overlap prototype events are withheld. Per-run manifests (with Langfuse trace IDs) and the exact prompt are in `results/run_outputs/run_manifests/` and `PROMPTS.md`.
 
 ## Headline rows
 

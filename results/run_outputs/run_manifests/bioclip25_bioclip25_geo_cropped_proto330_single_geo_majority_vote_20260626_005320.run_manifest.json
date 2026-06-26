@@ -1,0 +1,260 @@
+{
+  "schema_version": "wildlifebench.run_manifest.v1",
+  "run_id": "bioclip25_bioclip25_geo_cropped_proto330_single_geo_majority_vote_20260626_005320",
+  "run_type": "bioclip_benchmark",
+  "created_at": "2026-06-26T00:49:23Z",
+  "started_at": "2026-06-25T23:53:20Z",
+  "completed_at": "2026-06-26T00:49:23Z",
+  "model": {
+    "model_key": "bioclip25",
+    "api_model": "hf-hub:imageomics/bioclip-2.5-vith14",
+    "reported_model_identifier": "hf-hub:imageomics/bioclip-2.5-vith14",
+    "provider": "local_cli",
+    "family": "bioclip",
+    "description": "Local pybioclip specialist/open-foundation-model comparator."
+  },
+  "api_route": {
+    "provider": "local_cli",
+    "backend": "pybioclip TreeOfLifeClassifier",
+    "endpoint": null,
+    "transport": "file paths passed to a separate local pybioclip Python runtime"
+  },
+  "prompt": null,
+  "dataset": {
+    "dataset_dir": "data_package/model_inputs",
+    "dataset_fingerprint": {
+      "n_events": 330,
+      "n_frames": 1278,
+      "fingerprint_sha256": "a65a99b30885b16e9e40c5b94d118892cad3ed8dd297bdeb976e23a20d23b825"
+    }
+  },
+  "image_resolution": {
+    "policy": "native timestamp-cropped runner frames",
+    "scope": "BioCLIP specialist comparator",
+    "details": "WildlifeBench passes cropped JPEG paths; pybioclip applies its own 224 px model transform.",
+    "image_source": "data_package/model_inputs"
+  },
+  "run_parameters": {
+    "run_tag": "bioclip25_geo_cropped_proto330_single",
+    "timestamp": "20260626_005320",
+    "candidate_policy": "geo",
+    "aggregation": "majority_vote",
+    "model": "hf-hub:imageomics/bioclip-2.5-vith14",
+    "pretrained": null,
+    "device": "cpu",
+    "batch_size": 10,
+    "custom_label_template_policy": "single_photo",
+    "k": 5,
+    "limit_events": null,
+    "classifier_mode": "custom_labels",
+    "bioclip_python": "<local_bioclip_python_redacted>\\Scripts\\python.exe",
+    "bioclip_runtime": {
+      "open_clip_torch_version": "3.3.0",
+      "platform": "Windows-11-10.0.22631-SP0",
+      "pybioclip_version": "2.1.5",
+      "python_executable": "<local_bioclip_python_redacted>\\Scripts\\python.exe",
+      "python_version": "3.12.13",
+      "torch_version": "2.12.1",
+      "query_method": "external_python_importlib_metadata"
+    },
+    "image_package_policy": {
+      "image_dir": "data_package/model_inputs",
+      "input_policy": "timestamp-cropped EXIF-stripped flat BioCLIP runner package",
+      "manifest_path": "data_package/model_inputs",
+      "event_set_id": "gbif_award_proto330_20260625",
+      "event_count": 330,
+      "species_count": 110,
+      "frame_count": 1278,
+      "country_counts": {
+        "Belgium": 105,
+        "Ecuador": 85,
+        "France": 4,
+        "Germany": 5,
+        "Luxembourg": 131
+      },
+      "manifest_image_policy": "timestamp-cropped JPEG byte copies from prototype_cropped_timestamp plus Chloris sidecar root"
+    }
+  },
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "provider_request_ids": []
+  },
+  "cost": {
+    "total_usd": 0.0,
+    "source": "local_cli",
+    "note": "BioCLIP run has no LLM API token billing."
+  },
+  "trace": {
+    "langfuse": {
+      "enabled": false,
+      "trace_id": null,
+      "trace_url": null
+    }
+  },
+  "environment": {
+    "omitted_from_public_release": true,
+    "reason": "Raw runner environment and dirty-tree status were removed from the public review package."
+  },
+  "raw_result_files": [
+    {
+      "path": "results/full_proto330/bioclip25_bioclip25_geo_cropped_proto330_single_geo_majority_vote_20260626_005320.json",
+      "exists": true,
+      "bytes": 3010482,
+      "sha256": "7e9b3b0784e0ce5c539ceb067928896295a679538ede4af11f7fe66d5b75d65c"
+    },
+    {
+      "path": "results/full_proto330/bioclip25_bioclip25_geo_cropped_proto330_single_geo_majority_vote_20260626_005320_BEL_frame_predictions.csv",
+      "exists": true,
+      "bytes": 690427,
+      "sha256": "4454fab88828ebe93ed1e88880f018480291aaf4f72f4d269f8e882f8741b0e8"
+    },
+    {
+      "path": "results/full_proto330/bioclip25_bioclip25_geo_cropped_proto330_single_geo_majority_vote_20260626_005320_BEL_worker_log.json",
+      "exists": true,
+      "bytes": 1188,
+      "sha256": "808538c7f6c3d485e8fb3156a1d51d1cd9e2039af8696adcabdae81b8dc08b49"
+    },
+    {
+      "path": "results/full_proto330/bioclip25_bioclip25_geo_cropped_proto330_single_geo_majority_vote_20260626_005320_DEU_frame_predictions.csv",
+      "exists": true,
+      "bytes": 13441,
+      "sha256": "e6cc95303964795808526e684a3f004df1a025319caec27df0e75ce72ad98a23"
+    },
+    {
+      "path": "results/full_proto330/bioclip25_bioclip25_geo_cropped_proto330_single_geo_majority_vote_20260626_005320_DEU_worker_log.json",
+      "exists": true,
+      "bytes": 1186,
+      "sha256": "c4b57936997794b07e87d5fd6ba57fe0c12a3724df5fc532da0d12cbeccc27ec"
+    },
+    {
+      "path": "results/full_proto330/bioclip25_bioclip25_geo_cropped_proto330_single_geo_majority_vote_20260626_005320_ECU_frame_predictions.csv",
+      "exists": true,
+      "bytes": 538555,
+      "sha256": "1590b90c2b836ae7051bad5c6b1710b4ef83c927a68d1e89feecb11050a73d32"
+    },
+    {
+      "path": "results/full_proto330/bioclip25_bioclip25_geo_cropped_proto330_single_geo_majority_vote_20260626_005320_ECU_worker_log.json",
+      "exists": true,
+      "bytes": 1189,
+      "sha256": "74eb8ab170a07dc51adc5b3a2ac35803b9ea4afd0e5a6439fc6fbca0a812beec"
+    },
+    {
+      "path": "results/full_proto330/bioclip25_bioclip25_geo_cropped_proto330_single_geo_majority_vote_20260626_005320_FRA_frame_predictions.csv",
+      "exists": true,
+      "bytes": 15183,
+      "sha256": "74928d0675c11e0f42a2792fe83f8f5e7ba803e5005f0ec5ec04033a67b57f00"
+    },
+    {
+      "path": "results/full_proto330/bioclip25_bioclip25_geo_cropped_proto330_single_geo_majority_vote_20260626_005320_FRA_worker_log.json",
+      "exists": true,
+      "bytes": 1186,
+      "sha256": "21418d100f3a19b6e5441f454a90309206967595ad5065711ac900d0b19b9180"
+    },
+    {
+      "path": "results/full_proto330/bioclip25_bioclip25_geo_cropped_proto330_single_geo_majority_vote_20260626_005320_LUX_frame_predictions.csv",
+      "exists": true,
+      "bytes": 457171,
+      "sha256": "c9bfa940e606655048f40d834cac4f258e64161a824e360152d245348af5a1b6"
+    },
+    {
+      "path": "results/full_proto330/bioclip25_bioclip25_geo_cropped_proto330_single_geo_majority_vote_20260626_005320_LUX_worker_log.json",
+      "exists": true,
+      "bytes": 1188,
+      "sha256": "35b43e39eec58fd45929f454fb9a78ff83f60adf19eaede0a349365c0101167c"
+    }
+  ],
+  "candidate_list_files": [
+    {
+      "path": "data_package/model_inputs",
+      "exists": true,
+      "bytes": 183652,
+      "sha256": "bf64769123b76b48f0aa0af211e6f17c10df972a754514e89a6807c2bdf1e855"
+    },
+    {
+      "path": "data_package/model_inputs",
+      "exists": true,
+      "bytes": 11840,
+      "sha256": "8fe3f8b9ffcc48f0c489e4de1096abd4072851b60b2d7a574ea9b171f9ee5414"
+    },
+    {
+      "path": "data_package/model_inputs",
+      "exists": true,
+      "bytes": 225042,
+      "sha256": "30f5a016643560b90fe493a12b13c884b2585d7354aafb8afa189ade56509ca9"
+    },
+    {
+      "path": "data_package/model_inputs",
+      "exists": true,
+      "bytes": 14553,
+      "sha256": "293d1c83e0130baefe146435c5bfffe860b84c2974fe3236905f0412c4161e0a"
+    },
+    {
+      "path": "data_package/model_inputs",
+      "exists": true,
+      "bytes": 265889,
+      "sha256": "745feb6cc49378a97756cda4f13e05e20a72306675be7a565249430639978420"
+    },
+    {
+      "path": "data_package/model_inputs",
+      "exists": true,
+      "bytes": 18077,
+      "sha256": "99bf109d2871f12817875aff0959b15063647f67ef8eb4c007eac0792fcd092e"
+    },
+    {
+      "path": "data_package/model_inputs",
+      "exists": true,
+      "bytes": 202467,
+      "sha256": "c89ac120b62b4127c90fe310e29859b92b8c70e259eb37ffcdfc4b917acedd62"
+    },
+    {
+      "path": "data_package/model_inputs",
+      "exists": true,
+      "bytes": 13111,
+      "sha256": "ba9aa377a900f1666d3f22ea8d4396dc1c622f48d7457e135f85902d35c9cab1"
+    },
+    {
+      "path": "data_package/model_inputs",
+      "exists": true,
+      "bytes": 110943,
+      "sha256": "b16127e5ccf073601c77f8dd67cff563fb42c5701907771d290d1c76e420dbf4"
+    },
+    {
+      "path": "data_package/model_inputs",
+      "exists": true,
+      "bytes": 7037,
+      "sha256": "cf27d20399e11c970e7b9ee1a4f2e4ea2733adcc5550308d6ff57f41571aa5ef"
+    }
+  ],
+  "tol_taxa_file": {
+    "path": "results/full_proto330/bioclip2_tol_taxa_20260625.csv",
+    "exists": true,
+    "bytes": 87835257,
+    "sha256": "bfdfedff9b40f99a7265ae21de3e1f969b627c18d2c4728d7e7f18d533ace3a0"
+  },
+  "coverage_report_files": [
+    {
+      "path": "results/full_proto330/bioclip2_proto330_taxon_coverage_20260625.json",
+      "exists": true,
+      "bytes": 59481,
+      "sha256": "0baf2bd6b5cbd8c20ec166dedd5b5884a0ac3053be8796fc9a946b5d5cf136e4"
+    },
+    {
+      "path": "results/full_proto330/bioclip2_proto330_taxon_coverage_20260625.md",
+      "exists": true,
+      "bytes": 16110,
+      "sha256": "9e1b3ed8088b80af54658135ee6251c8bdd7790fa1803a98b0d7599cd78da81c"
+    }
+  ],
+  "extra": {
+    "worker_script": "results/full_proto330/bioclip_worker_20260626_005320.py",
+    "raw_output_count": 10,
+    "candidate_payload_count": 5,
+    "source_overlap_policy": {
+      "status": "not_assessed_by_runner",
+      "note": "Candidate-list provenance is recorded here; BioCLIP training-data overlap requires separate methodology notes before public claims."
+    },
+    "dry_run": false
+  }
+}

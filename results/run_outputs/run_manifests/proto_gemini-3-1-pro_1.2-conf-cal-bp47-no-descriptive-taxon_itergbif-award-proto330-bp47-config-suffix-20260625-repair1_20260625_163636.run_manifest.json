@@ -1,0 +1,230 @@
+{
+  "schema_version": "wildlifebench.run_manifest.v1",
+  "run_id": "proto_gemini-3-1-pro_1.2-conf-cal-bp47-no-descriptive-taxon_itergbif-award-proto330-bp47-config-suffix-20260625-repair1_20260625_163636",
+  "run_type": "llm_inference",
+  "created_at": "2026-06-25T15:36:36Z",
+  "started_at": "2026-06-25T15:30:30Z",
+  "completed_at": "2026-06-25T15:36:36Z",
+  "model": {
+    "model_key": "gemini-3-1-pro",
+    "api_model": "gemini-3.1-pro-preview",
+    "reported_model_identifier": "gemini-3.1-pro-preview",
+    "provider_version_pin": null,
+    "provider": "google",
+    "family": "gemini",
+    "description": "Benchmark - Flagship Pro (reference, NOT council)"
+  },
+  "api_route": {
+    "provider": "google",
+    "backend": "vertex_rest_api_key",
+    "api_model": "gemini-3.1-pro-preview",
+    "endpoint": "https://aiplatform.googleapis.com/v1/{project}/locations/{location}/publishers/google/models/{model}:generateContent",
+    "gcp_location": "global",
+    "transport": "inline image bytes/PIL images"
+  },
+  "prompt": {
+    "version": "1.2-conf-cal-bp47-no-descriptive-taxon",
+    "template_sha256": "ca6a168ce409fc10786b2095705640a7f84a1ab4bd87789a4670f1bf48f2a1f1",
+    "full_prompt_example_sha256": "04c61666a84d2afcd92e2bd1e4520522370bdb0a8c0653bfa7906c6f9ad72473",
+    "abstention_suffix_sha256": "b7fdbb3eb3bd0aff5d60c94f82cbc462c4dff4bdb8f440f03c96b9b52a299447"
+  },
+  "dataset": {
+    "dataset_dir": "data_package/model_inputs",
+    "dataset_fingerprint": {
+      "n_events": 330,
+      "n_frames": 1278,
+      "fingerprint_sha256": "0b8f0d4de665174b8061fe6f10d5b584eacc22e7a54388856c7ef60b6fe22244"
+    }
+  },
+  "image_resolution": {
+    "policy": "native post-crop resolution",
+    "scope": "LLM API call",
+    "details": "No pre-resize in WildlifeBench; provider-internal downsampling, if any, is part of the measured deployment."
+  },
+  "decoding": {
+    "mode": "temperature_0_top_p_1_seed_42",
+    "temperature": 0,
+    "top_p": 1.0,
+    "top_k": null,
+    "max_output_tokens": null,
+    "candidate_count": null
+  },
+  "run_parameters": {
+    "per_species_limit": null,
+    "difficulty": null,
+    "iter_num": "gbif-award-proto330-bp47-config-suffix-20260625-repair1",
+    "dataset_extra_dirs": [
+      "data_package/model_inputs"
+    ],
+    "skip_ids_count": 329,
+    "temperature": 0,
+    "top_p": 1.0,
+    "seed": 42,
+    "decoding_mode": "temperature_0_top_p_1_seed_42",
+    "max_tokens": null,
+    "truncation_retry_max": 2,
+    "truncation_token_threshold": 60,
+    "partial": false,
+    "stop_reason": null,
+    "n_complete": 330,
+    "n_events_total": 330,
+    "non_groq_delay_seconds": 0.5,
+    "max_output_tokens_omitted": true
+  },
+  "usage": {
+    "input_tokens": 1490112,
+    "output_tokens": 34170,
+    "total_tokens": 1524282,
+    "provider_request_ids": []
+  },
+  "cost": {
+    "total_usd": null,
+    "source": "not_available_locally",
+    "note": "Langfuse may infer cost from trace usage when configured; local manifest does not invent prices."
+  },
+  "trace": {
+    "langfuse": {
+      "enabled": true,
+      "trace_id": "8b42dbf384190cc68b43c6282e77c7fe",
+      "trace_url": "https://cloud.langfuse.com/project/cmoua1qeo006qad07hsgo5cuv/traces/8b42dbf384190cc68b43c6282e77c7fe"
+    }
+  },
+  "environment": {
+    "omitted_from_public_release": true,
+    "reason": "Raw runner environment and dirty-tree status were removed from the public review package."
+  },
+  "raw_result_files": [
+    {
+      "path": "results/full_proto330/proto_gemini-3-1-pro_1.2-conf-cal-bp47-no-descriptive-taxon_itergbif-award-proto330-bp47-config-suffix-20260625-repair1_20260625_163636.json",
+      "exists": true,
+      "bytes": 415371,
+      "sha256": "66e4eacf475993e3958adb8aa8ea340aeabd7e73ccf9bc80ce3cfa761faf5179"
+    }
+  ],
+  "extra": {
+    "output_json_contains_prompt_template": true,
+    "output_json_contains_full_prompt_example": true,
+    "prompt_suffix_policy": {
+      "mode": "required_gemini_balance_caution",
+      "suffix": "Balance caution with evidence: abstain when features are missing, but commit when the visible features are diagnostic.",
+      "evidence": "2026-05-24 Gemini medium-110 lift plus full-330 confirmation on gemini-3-5-flash",
+      "family": "gemini",
+      "model_name": "gemini-3-1-pro",
+      "suffix_required": true
+    },
+    "dataset_roots": [
+      "data_package/model_inputs",
+      "data_package/model_inputs"
+    ],
+    "metadata_corrections": [
+      {
+        "date": "2026-06-25",
+        "reason": "Gemini 3.1 Pro has no_max_tokens=True; provider request omits maxOutputTokens. Earlier manifest metadata inherited the project default 1000 even though the API call did not send it.",
+        "fields": [
+          "run_parameters.max_tokens",
+          "run_parameters.max_output_tokens_omitted",
+          "decoding.max_output_tokens"
+        ]
+      }
+    ]
+  },
+  "reporting_checklist": {
+    "schema_version": "wildlifebench.api_row_reporting_checklist.v1",
+    "scope": "api_system_row",
+    "audit_grade": "audit_grade",
+    "missing_required": [],
+    "checks": {
+      "run_id": {
+        "required": true,
+        "present": true,
+        "detail": "Stable local run identifier."
+      },
+      "timestamps": {
+        "required": true,
+        "present": true,
+        "detail": "Started/completed/manifest-created timestamps are recorded."
+      },
+      "local_result_file_hash": {
+        "required": true,
+        "present": true,
+        "detail": "Local result JSON path, byte size, and SHA-256 are recorded."
+      },
+      "dataset_fingerprint": {
+        "required": true,
+        "present": true,
+        "detail": "Dataset event/frame fingerprint is recorded."
+      },
+      "model_identifier": {
+        "required": true,
+        "present": true,
+        "detail": "Model key and provider API model identifier are recorded."
+      },
+      "model_version_or_alias_pin": {
+        "required": true,
+        "present": true,
+        "detail": "Provider-specific immutable pin when available, otherwise the exact reported API model alias."
+      },
+      "provider_route": {
+        "required": true,
+        "present": true,
+        "detail": "Provider, backend, endpoint, and image/text transport are recorded."
+      },
+      "prompt_hashes": {
+        "required": true,
+        "present": true,
+        "detail": "Prompt template, concrete example, and suffix hashes are recorded."
+      },
+      "generation_parameters": {
+        "required": true,
+        "present": true,
+        "detail": "Generation/run parameters are recorded."
+      },
+      "decoding_mode": {
+        "required": true,
+        "present": true,
+        "detail": "Decoding mode is explicitly named rather than inferred later."
+      },
+      "image_policy": {
+        "required": true,
+        "present": true,
+        "detail": "Image resolution/preprocessing policy is recorded."
+      },
+      "token_usage": {
+        "required": false,
+        "present": true,
+        "detail": "Token usage is recorded where provider telemetry exposes it."
+      },
+      "cost_slot": {
+        "required": false,
+        "present": true,
+        "detail": "Cost source is recorded, including explicit not-available status."
+      },
+      "trace_reference": {
+        "required": false,
+        "present": true,
+        "detail": "Langfuse trace reference slot is recorded even when tracing is disabled."
+      },
+      "environment_git": {
+        "required": true,
+        "present": true,
+        "detail": "Git commit and branch are recorded."
+      },
+      "environment_runtime": {
+        "required": true,
+        "present": true,
+        "detail": "Python/runtime package environment is recorded."
+      },
+      "uv_lock": {
+        "required": false,
+        "present": true,
+        "detail": "uv.lock provenance slot is recorded."
+      },
+      "error_retry_policy": {
+        "required": false,
+        "present": false,
+        "detail": "Retry/error policy or retry summary is recorded when available."
+      }
+    },
+    "note": "This checklist supports API-row reporting only; agent-system and specialist-baseline rows remain separate measurands."
+  }
+}

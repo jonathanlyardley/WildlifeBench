@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WildlifeBenchmark GBIF Award Preview</title>
+  <meta name="description" content="Standalone GBIF award prototype preview from the vetted 246-event WildlifeBenchmark comparison table." />
+  <meta name="robots" content="noindex" />
+  <style>
+    :root {
+      --bg: #0a1410;
+      --bg-alt: #102018;
+      --surface: #152a20;
+      --border: #1e3b2c;
+      --text: #d4e8dc;
+      --dim: #9dc29b;
+      --lichen: #8fbd6d;
+      --amber: #d4a574;
+      --rust: #c4614a;
+      --jungle: #4a8763;
+      --ink: #06100c;
+    }
+    * { box-sizing: border-box; }
+    html { color-scheme: dark; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at 92% 0%, rgba(143,189,109,0.08), transparent 32%), var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    a { color: var(--lichen); }
+    .shell { max-width: 1160px; margin: 0 auto; padding: 24px; }
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,20,16,0.82);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      backdrop-filter: blur(12px);
+    }
+    .topbar { max-width: 1160px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .strap { color: var(--dim); font-size: 13px; text-align: right; }
+    .notice {
+      border: 1px solid rgba(212,165,116,0.42);
+      background: rgba(154,111,46,0.18);
+      border-radius: 8px;
+      padding: 14px 16px;
+      color: #e8c47a;
+      font-size: 14px;
+    }
+    h1, h2, h3 { margin: 0; line-height: 1.15; }
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(34px, 5vw, 58px);
+      font-weight: 600;
+      letter-spacing: 0;
+      max-width: 860px;
+    }
+    h2 { font-size: 24px; margin-bottom: 12px; }
+    h3 { font-size: 15px; }
+    .lead { margin: 14px 0 0; max-width: 820px; color: #b8d5c2; font-size: 18px; }
+    .status { margin-top: 10px; color: var(--dim); font-size: 13px; }
+    .section { padding: 26px 0; }
+    .grid { display: grid; gap: 16px; }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .card {
+      border: 1px solid var(--border);
+      background: rgba(21,42,32,0.94);
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 18px 48px rgba(0,0,0,0.22);
+    }
+    .chart-sub { margin: 4px 0 12px; color: var(--dim); font-size: 12px; }
+    .split-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+    .split-control-stack { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+    .split-controls { display: flex; align-items: center; gap: 14px; color: var(--dim); font-size: 12px; white-space: nowrap; }
+    .metric-controls { flex-wrap: wrap; justify-content: flex-end; }
+    .split-controls label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+    .split-controls input { accent-color: var(--lichen); }
+    .split-controls label:first-child input { accent-color: var(--amber); }
+    .class-disabled { opacity: 0.52; }
+    .split-chart { margin-top: 10px; }
+    svg { width: 100%; height: auto; display: block; overflow: visible; }
+    .cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .metric { border: 1px solid var(--border); background: var(--surface); border-radius: 8px; padding: 15px; }
+    .metric .v { font-family: ui-monospace, Menlo, Consolas, monospace; color: var(--lichen); font-size: 28px; font-weight: 700; }
+    .metric .l { margin-top: 3px; color: var(--dim); font-size: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 12px 10px; border-bottom: 1px solid rgba(30,59,44,0.82); }
+    th { color: var(--dim); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; text-align: right; }
+    th:first-child, td:first-child { text-align: left; }
+    td { text-align: right; }
+    tbody tr:nth-child(even) { background: rgba(0,0,0,0.11); }
+    .model { font-weight: 650; color: var(--text); }
+    .route { display: block; margin-top: 2px; color: var(--dim); font-size: 12px; }
+    .best { display: inline-block; margin-left: 8px; padding: 2px 7px; border-radius: 999px; background: rgba(143,189,109,0.18); color: var(--lichen); font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .muted { color: var(--dim); }
+    footer { border-top: 1px solid var(--border); padding: 24px; color: #6f9279; font-size: 12px; }
+    .foot-inner { max-width: 1160px; margin: 0 auto; display: flex; justify-content: space-between; gap: 16px; }
+    @media (max-width: 820px) {
+      .topbar, .foot-inner { align-items: flex-start; flex-direction: column; }
+      .strap { text-align: left; }
+      .grid.two, .cards { grid-template-columns: 1fr; }
+      .shell { padding: 18px; }
+      .split-head, .split-control-stack { align-items: flex-start; flex-direction: column; }
+      .split-controls { white-space: normal; }
+      table { min-width: 760px; }
+      .table-wrap { overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="topbar">
+      <div class="brand">WildlifeBenchmark</div>
+      <div class="strap">Camera Trap / GBIF award preview / standalone HTML</div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <div class="notice">Outlook / mock. Numbers come from the vetted 246-event comparison table. This is not a released or endorsed benchmark; the spoofed demo leaderboard is not used here. Cost uses indicative API list-price estimates, not measured run costs.</div>
+
+    <section class="section">
+      <h1>Camera Trap Burst ID - GBIF award preview</h1>
+      <p class="lead">Six identification routes compared on the same 246-event camera-trap set. Use, configure, or reject an AI route for human-supervised first-pass species labelling.</p>
+      <div id="status" class="status"></div>
+    </section>
+
+    <section class="section">
+      <h2>Results</h2>
+      <div class="card" id="species-chart"></div>
+      <div class="grid two" style="margin-top:16px">
+        <div class="card" id="hall-chart"></div>
+        <div class="card" id="cost-chart"></div>
+      </div>
+      <div class="grid two" style="margin-top:16px">
+        <div class="card" id="radar-chart"></div>
+        <div class="card" id="rawadj-chart"></div>
+      </div>
+      <div class="card" id="adjtis-chart" style="margin-top:16px"></div>
+    </section>
+
+    <section class="section">
+      <h2>Evaluation set</h2>
+      <div id="scope-cards" class="cards"></div>
+      <p class="status">Belgium / Ecuador / France / Germany / Luxembourg.</p>
+    </section>
+
+    <section class="section">
+      <h2>Comparison table</h2>
+      <div class="card table-wrap" id="table"></div>
+      <p class="status">A short <code>n/a</code> marks metrics that do not apply to that route. Local artefacts are present; public release path pending.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot-inner">
+      <span>&copy; <span id="year"></span> WildlifeBenchmark / Preview outlook / No trackers</span>
+      <span>Prototype/development-confirmation evidence for responsible AI-assisted camera-trap labelling.</span>
+    </div>
+  </footer>
+
+  <script>
+    const DATA = {
+      preview_label: "GBIF award prototype preview - vetted local comparison data",
+      generated: "2026-06-26",
+      presentation_scope: "246-event comparison set",
+      release_status: "Local artefact paths present; public release path pending.",
+      cost_note: "Indicative API list-price estimate per 1,000 events, not a measured benchmark cost. $0 = local/no API route. * = open weights with a locally runnable no-API option.",
+      scope: { event_count: 246, species_count: 82, bird_species_count: 40, countries_count: 5 },
+      rows: [
+        { model_route: "SpeciesNet v4.0.3b geo ensemble", display_name: "SpeciesNet v4.0.3b geo ensemble", route_group: "Specialist camera-trap baseline", is_vlm: false, api_cost_per_1k_usd: 0, cost_asterisk: false, runs: 1, species_accuracy_pct: 26.0, class_breakdown: { Aves: { label: "Birds", event_count: 120, species_count: 40, species_accuracy_pct: 9.2, raw_tis_pct: 16.8, adjusted_tis_pct: null, hallucinations: null }, Mammalia: { label: "Mammals", event_count: 126, species_count: 42, species_accuracy_pct: 42.1, raw_tis_pct: 53.0, adjusted_tis_pct: null, hallucinations: null } }, raw_tis_pct: 35.3, adjusted_tis_pct: null, macro_f1: 0.270, hallucinations: null },
+        { model_route: "BioCLIP 2.5 geo custom labels", display_name: "BioCLIP 2.5 geo custom labels", route_group: "Open-foundation comparator", is_vlm: false, api_cost_per_1k_usd: 0, cost_asterisk: true, runs: 1, species_accuracy_pct: 29.3, class_breakdown: { Aves: { label: "Birds", event_count: 120, species_count: 40, species_accuracy_pct: 27.5, raw_tis_pct: 33.9, adjusted_tis_pct: -38.6, hallucinations: 87.0 }, Mammalia: { label: "Mammals", event_count: 126, species_count: 42, species_accuracy_pct: 31.0, raw_tis_pct: 44.7, adjusted_tis_pct: -24.4, hallucinations: 87.0 } }, raw_tis_pct: 39.4, adjusted_tis_pct: -31.3, macro_f1: 0.216, hallucinations: 174 },
+        { model_route: "Gemini 3.1 Flash-Lite", display_name: "Gemini 3.1 Flash-Lite", route_group: "General VLM API", is_vlm: true, api_cost_per_1k_usd: 0.30, cost_asterisk: false, runs: 1, species_accuracy_pct: 43.1, class_breakdown: { Aves: { label: "Birds", event_count: 120, species_count: 40, species_accuracy_pct: 45.0, raw_tis_pct: 56.8, adjusted_tis_pct: 16.0, hallucinations: 49.0 }, Mammalia: { label: "Mammals", event_count: 126, species_count: 42, species_accuracy_pct: 41.3, raw_tis_pct: 56.7, adjusted_tis_pct: 10.7, hallucinations: 58.0 } }, raw_tis_pct: 56.8, adjusted_tis_pct: 13.3, macro_f1: 0.3888, hallucinations: 107 },
+        { model_route: "Gemini 3.1 Pro", display_name: "Gemini 3.1 Pro", route_group: "General VLM API", is_vlm: true, api_cost_per_1k_usd: 6.00, cost_asterisk: false, runs: 1, species_accuracy_pct: 43.5, class_breakdown: { Aves: { label: "Birds", event_count: 120, species_count: 40, species_accuracy_pct: 49.2, raw_tis_pct: 59.5, adjusted_tis_pct: 38.7, hallucinations: 25.0 }, Mammalia: { label: "Mammals", event_count: 126, species_count: 42, species_accuracy_pct: 38.1, raw_tis_pct: 54.0, adjusted_tis_pct: 32.5, hallucinations: 27.0 } }, raw_tis_pct: 56.7, adjusted_tis_pct: 35.5, macro_f1: 0.4705, hallucinations: 52 },
+        { model_route: "Gemini 3.5 Flash", display_name: "Gemini 3.5 Flash", route_group: "General VLM API", is_vlm: true, api_cost_per_1k_usd: 0.60, cost_asterisk: false, runs: 3, species_accuracy_pct: 44.4, class_breakdown: { Aves: { label: "Birds", event_count: 120, species_count: 40, species_accuracy_pct: 51.7, raw_tis_pct: 63.0, adjusted_tis_pct: 48.6, hallucinations: 17.3 }, Mammalia: { label: "Mammals", event_count: 126, species_count: 42, species_accuracy_pct: 37.6, raw_tis_pct: 58.2, adjusted_tis_pct: 39.4, hallucinations: 23.7 } }, species_accuracy_pct_min: 43.5, species_accuracy_pct_max: 45.5, raw_tis_pct: 60.5, raw_tis_pct_min: 60.0, raw_tis_pct_max: 61.0, adjusted_tis_pct: 43.9, adjusted_tis_pct_min: 42.9, adjusted_tis_pct_max: 44.8, macro_f1: 0.4916, hallucinations: 41, hallucinations_min: 40, hallucinations_max: 42 },
+        { model_route: "Qwen3-VL-30B", display_name: "Qwen3-VL-30B", route_group: "Open VLM API", is_vlm: true, api_cost_per_1k_usd: 0.40, cost_asterisk: true, runs: 2, species_accuracy_pct: 27.4, class_breakdown: { Aves: { label: "Birds", event_count: 120, species_count: 40, species_accuracy_pct: 27.9, raw_tis_pct: 38.4, adjusted_tis_pct: 5.9, hallucinations: 39.0 }, Mammalia: { label: "Mammals", event_count: 126, species_count: 42, species_accuracy_pct: 27.0, raw_tis_pct: 42.7, adjusted_tis_pct: 0.6, hallucinations: 53.0 } }, species_accuracy_pct_min: 27.2, species_accuracy_pct_max: 27.6, raw_tis_pct: 40.6, adjusted_tis_pct: 3.2, adjusted_tis_pct_min: 2.0, adjusted_tis_pct_max: 4.4, macro_f1: 0.2375, hallucinations: 92, hallucinations_min: 89, hallucinations_max: 95 }
+      ]
+    };
+
+    const C = { text:"#d4e8dc", dim:"#9dc29b", border:"#1e3b2c", surface:"#152a20", lichen:"#8fbd6d", parrot:"#6b9e78", amber:"#d4a574", rust:"#c4614a", jungle:"#4a8763" };
+    const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+    const nm = (r) => r.display_name || r.model_route;
+    const nmStar = (r) => nm(r) + (r.cost_asterisk ? " *" : "");
+    const scatterNmStar = (r) => {
+      const label = nm(r)
+        .replace("SpeciesNet v4.0.3b geo ensemble", "SpeciesNet")
+        .replace("BioCLIP 2.5 geo custom labels", "BioCLIP 2.5")
+        .replace("Gemini 3.1 Flash-Lite", "Gemini 3.1 Lite");
+      return label + (r.cost_asterisk ? " *" : "");
+    };
+    const pct = (v) => v == null ? "n/a" : v.toFixed(1) + "%";
+    const num = (v, dp = 0) => v == null ? "n/a" : v.toFixed(dp);
+    function colour(r) {
+      const name = `${r.display_name || ""} ${r.model_route || ""}`;
+      if (r.route_group === "Specialist camera-trap baseline") return C.amber;
+      if (r.route_group === "Open-foundation comparator") return C.rust;
+      if (/Qwen/i.test(name)) return C.text;
+      if (/Gemini 3\.1 Flash-Lite/i.test(name)) return C.parrot;
+      if (/Gemini 3\.1 Pro/i.test(name)) return C.lichen;
+      if (/Gemini 3\.5 Flash/i.test(name)) return mixHex(C.lichen, C.amber, 0.28);
+      if (r.route_group === "Open VLM API") return C.text;
+      return C.lichen;
+    }
+    function mixHex(hex, target, amount) {
+      const clean = hex.replace("#", ""), tgt = target.replace("#", "");
+      const rgb = [0,2,4].map(i => parseInt(clean.slice(i, i + 2), 16));
+      const trgb = [0,2,4].map(i => parseInt(tgt.slice(i, i + 2), 16));
+      return "#" + rgb.map((v,i) => Math.round(v + (trgb[i] - v) * amount).toString(16).padStart(2, "0")).join("");
+    }
+    const classTint = (r, key) => key === "Aves" ? mixHex(colour(r), "#f0e6d2", 0.22) : key === "Mammalia" ? mixHex(colour(r), "#06100c", 0.28) : colour(r);
+    const METRICS = {
+      species: {
+        label: "Species accuracy", valueKey: "species_accuracy_pct", splitKey: "species_accuracy_pct",
+        min: 0, max: 60, step: 15, ticks: [0, 15, 30, 45, 60],
+        fmt: (v) => v == null ? "n/a" : pct(v),
+        tick: (v) => `${v}%`,
+        axis: (mode) => mode.key === "overall" ? "Species accuracy (%) - all 246 events" :
+          mode.key === "Aves" ? "Bird species accuracy (%) - 120 events / 40 species" :
+            "Mammal species accuracy (%) - 126 events / 42 species",
+      },
+      raw: {
+        label: "Raw TIS", valueKey: "raw_tis_pct", splitKey: "raw_tis_pct",
+        min: 0, max: 70, step: 10, ticks: [0, 10, 20, 30, 40, 50, 60, 70],
+        fmt: (v) => v == null ? "n/a" : pct(v),
+        tick: (v) => `${v}%`,
+        axis: (mode) => mode.key === "overall" ? "Raw TIS (%) - all 246 events" :
+          mode.key === "Aves" ? "Bird Raw TIS (%) - 120 events / 40 species" :
+            "Mammal Raw TIS (%) - 126 events / 42 species",
+      },
+      adjusted: {
+        label: "Adjusted TIS", valueKey: "adjusted_tis_pct", splitKey: "adjusted_tis_pct",
+        min: -40, max: 50, step: 20, ticks: [-40, -20, 0, 20, 40],
+        fmt: (v) => v == null ? "n/a" : pct(v),
+        tick: (v) => `${v}%`,
+        axis: (mode) => mode.key === "overall" ? "Adjusted TIS (%) - safety-weighted, all routes with comparable values" :
+          mode.key === "Aves" ? "Bird Adjusted TIS (%) - 120 events / 40 species" :
+            "Mammal Adjusted TIS (%) - 126 events / 42 species",
+      },
+      f1: {
+        label: "Macro F1", valueKey: "macro_f1", splitKey: null,
+        min: 0, max: 0.6, step: 0.2, ticks: [0, 0.2, 0.4, 0.6],
+        fmt: (v) => v == null ? "n/a" : v.toFixed(3),
+        tick: (v) => Number(v).toFixed(1),
+        axis: () => "Macro F1 - 246-event / 82-species overlap table",
+      },
+    };
+    const classMode = (visible, metric) => !metric.splitKey || (visible.birds && visible.mammals)
+      ? { key: "overall", label: "Overall" }
+      : visible.birds
+        ? { key: "Aves", label: "Birds" }
+        : { key: "Mammalia", label: "Mammals" };
+    const metricValue = (r, metric, mode) => mode.key === "overall" || !metric.splitKey ? r[metric.valueKey] : r.class_breakdown[mode.key]?.[metric.splitKey];
+    const metricSortValue = (r, metric, mode) => metricValue(r, metric, mode) ?? -Infinity;
+    const svgText = (x, y, text, attrs = "") => `<text x="${x}" y="${y}" ${attrs}>${esc(text)}</text>`;
+    const shell = (title, sub, svg) => `<h3>${esc(title)}</h3><p class="chart-sub">${esc(sub)}</p>${svg}`;
+
+    function barChart(rows, key, opts) {
+      const sorted = [...rows].sort((a,b) => (b[key] ?? -999) - (a[key] ?? -999));
+      const W = 940, rowH = 44, H = 82 + sorted.length * rowH, left = 284, right = 34, top = 20, bottom = 48;
+      const innerW = W - left - right, innerH = H - top - bottom;
+      const max = opts.max || Math.ceil(Math.max(...sorted.map(r => r[key] || 0)) / 10) * 10;
+      const x = (v) => left + (Math.max(0, v) / max) * innerW;
+      const ticks = [0, max * 0.25, max * 0.5, max * 0.75, max];
+      let out = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(opts.title)}">`;
+      ticks.forEach(t => { const xx = x(t); out += `<line x1="${xx}" y1="${top}" x2="${xx}" y2="${top+innerH}" stroke="${C.border}" stroke-width="1"/><text x="${xx}" y="${H-16}" fill="${C.dim}" font-size="12" text-anchor="middle">${Math.round(t)}%</text>`; });
+      sorted.forEach((r,i) => {
+        const y = top + i * rowH + 7, w = Math.max(2, x(r[key]) - left);
+        out += `<text x="0" y="${y+19}" fill="${C.text}" font-size="13">${esc(nmStar(r))}</text>`;
+        out += `<rect x="${left}" y="${y}" width="${w}" height="24" rx="4" fill="${colour(r)}" opacity="0.95"/><text x="${x(r[key])+8}" y="${y+17}" fill="${C.text}" font-size="12">${pct(r[key])}</text>`;
+      });
+      if (opts.baseline) {
+        const b = x(opts.baseline.value);
+        out += `<line x1="${b}" y1="${top-2}" x2="${b}" y2="${top+innerH}" stroke="${C.amber}" stroke-dasharray="5 5" stroke-width="2"/>`;
+        out += `<text x="${b+6}" y="${top+12}" fill="${C.amber}" font-size="12">${esc(opts.baseline.label)}</text>`;
+      }
+      out += `<text x="${left}" y="${H-2}" fill="${C.dim}" font-size="12">${esc(opts.axis)}</text></svg>`;
+      return out;
+    }
+
+    function headlineMetricChart(rows, visible, metricKey) {
+      const metric = METRICS[metricKey] || METRICS.species;
+      const mode = classMode(visible, metric);
+      const sorted = [...rows].sort((a,b) => metricSortValue(b, metric, mode) - metricSortValue(a, metric, mode));
+      const W = 940, rowH = 50, H = 88 + sorted.length * rowH, left = 284, right = 36, top = 28, bottom = 48;
+      const innerW = W - left - right, innerH = H - top - bottom;
+      const x = (v) => left + ((v - metric.min) / (metric.max - metric.min)) * innerW;
+      const zeroX = x(Math.min(Math.max(0, metric.min), metric.max));
+      const legendColour = mode.key === "overall" ? C.dim : mode.key === "Aves" ? mixHex(C.amber, "#f0e6d2", 0.22) : mixHex(C.lichen, "#06100c", 0.28);
+      let out = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(metric.label)} across the six routes">`;
+      out += `<circle cx="${W-196}" cy="${top-10}" r="6" fill="${legendColour}"/><text x="${W-184}" y="${top-6}" fill="${C.text}" font-size="12">${esc(metric.label)} - ${esc(mode.label)}</text>`;
+      metric.ticks.forEach(t => {
+        const xx = x(t);
+        out += `<line x1="${xx}" y1="${top}" x2="${xx}" y2="${top+innerH}" stroke="${C.border}" stroke-width="1"/><text x="${xx}" y="${H-16}" fill="${C.dim}" font-size="12" text-anchor="middle">${esc(metric.tick(t))}</text>`;
+      });
+      if (metric.min < 0 && metric.max > 0) out += `<line x1="${zeroX}" y1="${top-2}" x2="${zeroX}" y2="${top+innerH}" stroke="${C.text}" stroke-width="1.2" opacity="0.45"/>`;
+      sorted.forEach((r,i) => {
+        const y = top + i * rowH;
+        out += `<text x="0" y="${y+28}" fill="${C.text}" font-size="13">${esc(nmStar(r))}</text>`;
+        const v = metricValue(r, metric, mode);
+        const yy = y + 11;
+        const fill = mode.key === "overall" ? colour(r) : classTint(r, mode.key);
+        if (v == null) {
+          out += `<text x="${zeroX+8}" y="${yy+17}" fill="${C.dim}" font-size="11">n/a</text>`;
+        } else {
+          const x0 = metric.min < 0 ? zeroX : x(metric.min);
+          const x1 = x(v);
+          const rx = Math.min(x0, x1);
+          const rw = Math.max(2, Math.abs(x1 - x0));
+          const labelX = x1 >= x0 ? x1 + 8 : x1 - 8;
+          const anchor = x1 >= x0 ? "start" : "end";
+          out += `<rect x="${rx}" y="${yy}" width="${rw}" height="24" rx="4" fill="${fill}" opacity="0.94"/>`;
+          out += `<text x="${labelX}" y="${yy+17}" fill="${C.text}" font-size="11" text-anchor="${anchor}">${esc(metric.fmt(v))}</text>`;
+        }
+      });
+      out += `<text x="${left}" y="${H-2}" fill="${C.dim}" font-size="12">${esc(metric.axis(mode))}</text></svg>`;
+      return out;
+    }
+
+    function renderSpeciesSplit(rows) {
+      const el = document.getElementById("species-chart");
+      el.innerHTML = `<div class="split-head"><div><h3>Headline metric - overall and class filters</h3><p class="chart-sub">Choose one metric. Bird/mammal filters apply where class-level values exist.</p></div><div class="split-control-stack"><div class="split-controls metric-controls" aria-label="Headline chart metric"><label><input name="standalone-headline-metric" type="checkbox" value="species" checked>Species acc.</label><label><input name="standalone-headline-metric" type="checkbox" value="raw">Raw TIS</label><label><input name="standalone-headline-metric" type="checkbox" value="adjusted">Adjusted TIS</label><label><input name="standalone-headline-metric" type="checkbox" value="f1">Macro F1</label></div><div id="standalone-class-filter-controls" class="split-controls" aria-label="Species chart class filters"><label><input id="standalone-toggle-birds" type="checkbox" checked>Birds</label><label><input id="standalone-toggle-mammals" type="checkbox" checked>Mammals</label></div></div></div><div class="split-chart" id="species-split-svg"></div>`;
+      const birds = document.getElementById("standalone-toggle-birds");
+      const mammals = document.getElementById("standalone-toggle-mammals");
+      const metricControls = [...document.querySelectorAll('input[name="standalone-headline-metric"]')];
+      const classControls = document.getElementById("standalone-class-filter-controls");
+      const target = document.getElementById("species-split-svg");
+      const selectedMetricKey = () => metricControls.find(input => input.checked)?.value || "species";
+      function syncMetricControls(changed) {
+        metricControls.forEach(input => { input.checked = input === changed; });
+      }
+      function update(changed) {
+        if (changed && changed.name === "standalone-headline-metric") {
+          if (!changed.checked) changed.checked = true;
+          syncMetricControls(changed);
+        }
+        const metric = METRICS[selectedMetricKey()] || METRICS.species;
+        if (!metric.splitKey) {
+          birds.checked = true;
+          mammals.checked = true;
+        }
+        if (!birds.checked && !mammals.checked) changed.checked = true;
+        birds.disabled = !metric.splitKey;
+        mammals.disabled = !metric.splitKey;
+        classControls.classList.toggle("class-disabled", !metric.splitKey);
+        target.innerHTML = headlineMetricChart(rows, { birds: birds.checked, mammals: mammals.checked }, selectedMetricKey());
+      }
+      birds.addEventListener("change", () => update(birds));
+      mammals.addEventListener("change", () => update(mammals));
+      metricControls.forEach(input => input.addEventListener("change", () => update(input)));
+      update(birds);
+    }
+
+    function scatter(rows, opts) {
+      const W = 560, H = 380, l = 66, r = 28, t = 28, b = 58, iw = W-l-r, ih = H-t-b;
+      const plotXMin = opts.plotXMin ?? opts.xMin;
+      const plotYMin = opts.plotYMin ?? opts.yMin;
+      const plotYMax = opts.plotYMax ?? opts.yMax;
+      const x = (v) => l + ((v - plotXMin) / (opts.xMax - plotXMin)) * iw;
+      const y = (v) => t + ((v - plotYMin) / (plotYMax - plotYMin)) * ih;
+      const xticks = opts.xTicks || [opts.xMin, Math.round((opts.xMin+opts.xMax)/2), opts.xMax];
+      const yticks = opts.yTicks;
+      let out = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(opts.title)}">`;
+      out += `<rect x="${x(opts.good.x0)}" y="${y(opts.good.y0)}" width="${x(opts.good.x1)-x(opts.good.x0)}" height="${y(opts.good.y1)-y(opts.good.y0)}" fill="rgba(143,189,109,0.10)" stroke="none"/>`;
+      out += `<text x="${x(opts.good.x0)+8}" y="${y(opts.good.labelY ?? opts.good.y0)+18}" fill="${C.lichen}" font-size="12">${esc(opts.good.label)}</text>`;
+      xticks.forEach(v => { out += `<line x1="${x(v)}" y1="${t}" x2="${x(v)}" y2="${t+ih}" stroke="${C.border}"/><text x="${x(v)}" y="${H-20}" fill="${C.dim}" font-size="12" text-anchor="middle">${v}%</text>`; });
+      yticks.forEach(v => { out += `<line x1="${l}" y1="${y(v)}" x2="${l+iw}" y2="${y(v)}" stroke="${C.border}"/><text x="${l-10}" y="${y(v)+4}" fill="${C.dim}" font-size="12" text-anchor="end">${opts.yFmt(v)}</text>`; });
+      out += `<line x1="${l}" y1="${t+ih}" x2="${l+iw}" y2="${t+ih}" stroke="${C.border}"/><line x1="${l}" y1="${t}" x2="${l}" y2="${t+ih}" stroke="${C.border}"/>`;
+      rows.forEach((r, i) => {
+        const cx = x(r[opts.xKey]), cy = y(r[opts.yKey]), fill = colour(r);
+        if (!r.is_vlm) out += `<rect x="${cx-8}" y="${cy-8}" width="16" height="16" transform="rotate(45 ${cx} ${cy})" fill="${fill}" stroke="${C.text}" stroke-width="1.4"/>`;
+        else out += `<circle cx="${cx}" cy="${cy}" r="8" fill="${fill}" stroke="${C.text}" stroke-width="1.4"/>`;
+        let dx = cx > W - 170 ? -10 : 11, anchor = cx > W - 170 ? "end" : "start";
+        let dy = i % 2 ? -10 : 18;
+        let labelX = cx + dx, labelY = cy + dy, leader = false;
+        if (opts.title === "Accuracy vs cost") {
+          const name = nm(r);
+          if (/SpeciesNet/i.test(name)) { labelX = cx + 12; labelY = cy + 31; anchor = "start"; leader = true; }
+          else if (/BioCLIP/i.test(name)) { labelX = cx + 13; labelY = cy - 14; anchor = "start"; leader = true; }
+          else if (/Qwen/i.test(name)) { labelX = cx + 16; labelY = cy + 27; anchor = "start"; leader = true; }
+          else if (/Gemini 3\.1 Flash-Lite/i.test(name)) { labelX = cx - 13; labelY = cy + 19; anchor = "end"; }
+          else if (/Gemini 3\.5 Flash/i.test(name)) { labelX = cx - 11; labelY = cy + 30; anchor = "end"; }
+          else if (/Gemini 3\.1 Pro/i.test(name)) { labelX = cx - 9; labelY = cy - 10; anchor = "end"; }
+        }
+        if (leader) out += `<line x1="${cx}" y1="${cy}" x2="${labelX + (anchor === "end" ? 4 : -4)}" y2="${labelY - 4}" stroke="${C.dim}" stroke-width="0.8" opacity="0.55"/>`;
+        out += `<text x="${labelX}" y="${labelY}" fill="${C.text}" font-size="10.5" text-anchor="${anchor}">${esc(scatterNmStar(r))}</text>`;
+      });
+      out += `<text x="${l+iw/2}" y="${H-3}" fill="${C.dim}" font-size="12" text-anchor="middle">${esc(opts.xLabel)}</text>`;
+      out += `<text x="15" y="${t+ih/2}" fill="${C.dim}" font-size="12" transform="rotate(-90 15 ${t+ih/2})" text-anchor="middle">${esc(opts.yLabel)}</text></svg>`;
+      return out;
+    }
+
+    function radar(rows) {
+      const vlm = rows.filter(r => r.is_vlm), focal = vlm.find(r => /Gemini 3\.5 Flash/.test(r.model_route)), others = vlm.filter(r => r !== focal);
+      const axes = [
+        ["Species accuracy", "species_accuracy_pct", false],
+        ["Raw TIS", "raw_tis_pct", false],
+        ["Adjusted TIS", "adjusted_tis_pct", false],
+        ["Macro F1", "macro_f1", false],
+        ["Hallucination resist", "hallucinations", true]
+      ];
+      const W = 560, H = 380, cx = 280, cy = 196, R = 128;
+      const angle = (i) => -Math.PI/2 + i * Math.PI * 2 / axes.length;
+      const norm = (axis, value) => {
+        const vals = vlm.map(r => r[axis[1]]), lo = Math.min(...vals), hi = Math.max(...vals);
+        if (hi === lo) return 0.5;
+        const n = (value - lo) / (hi - lo);
+        return axis[2] ? 1 - n : n;
+      };
+      const points = (vals) => vals.map((v,i) => [cx + Math.cos(angle(i))*R*v, cy + Math.sin(angle(i))*R*v]).map(p => p.join(",")).join(" ");
+      const focalVals = axes.map(a => norm(a, focal[a[1]]));
+      const avgVals = axes.map(a => norm(a, others.reduce((s,r) => s + r[a[1]], 0) / others.length));
+      let out = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Gemini 3.5 Flash capability radar">`;
+      [0.25,0.5,0.75,1].forEach(r => {
+        const poly = axes.map((_,i) => [cx + Math.cos(angle(i))*R*r, cy + Math.sin(angle(i))*R*r].join(",")).join(" ");
+        out += `<polygon points="${poly}" fill="none" stroke="${C.border}" stroke-width="1"/>`;
+      });
+      axes.forEach((a,i) => {
+        const ax = cx + Math.cos(angle(i))*R, ay = cy + Math.sin(angle(i))*R;
+        out += `<line x1="${cx}" y1="${cy}" x2="${ax}" y2="${ay}" stroke="${C.border}"/>`;
+        out += `<text x="${cx + Math.cos(angle(i))*(R+42)}" y="${cy + Math.sin(angle(i))*(R+28)}" fill="${C.text}" font-size="12" text-anchor="middle">${esc(a[0])}</text>`;
+      });
+      out += `<polygon points="${points(avgVals)}" fill="rgba(212,165,116,0.12)" stroke="${C.amber}" stroke-width="2" stroke-dasharray="5 5"/>`;
+      out += `<polygon points="${points(focalVals)}" fill="rgba(143,189,109,0.24)" stroke="${C.lichen}" stroke-width="2.4"/>`;
+      out += `<circle cx="${cx}" cy="${cy}" r="2" fill="${C.text}"/><text x="18" y="28" fill="${C.lichen}" font-size="12">Gemini 3.5 Flash</text><text x="18" y="48" fill="${C.amber}" font-size="12">VLM-route average</text></svg>`;
+      return out;
+    }
+
+    function groupedBars(rows) {
+      const vlm = rows.filter(r => r.is_vlm).sort((a,b) => b.adjusted_tis_pct - a.adjusted_tis_pct);
+      const W = 560, H = 380, l = 62, r = 22, t = 26, b = 86, iw = W-l-r, ih = H-t-b, max = 70;
+      const y = (v) => t + ih - (v / max) * ih, groupW = iw / vlm.length;
+      let out = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Raw TIS versus Adjusted TIS grouped bars">`;
+      [0,20,40,60].forEach(v => { out += `<line x1="${l}" y1="${y(v)}" x2="${l+iw}" y2="${y(v)}" stroke="${C.border}"/><text x="${l-10}" y="${y(v)+4}" fill="${C.dim}" font-size="12" text-anchor="end">${v}%</text>`; });
+      vlm.forEach((row,i) => {
+        const gx = l + i*groupW + 20, bw = Math.min(34, groupW/3.4);
+        out += `<rect x="${gx}" y="${y(row.raw_tis_pct)}" width="${bw}" height="${t+ih-y(row.raw_tis_pct)}" rx="3" fill="${C.jungle}"/><rect x="${gx+bw+6}" y="${y(row.adjusted_tis_pct)}" width="${bw}" height="${t+ih-y(row.adjusted_tis_pct)}" rx="3" fill="${C.lichen}"/>`;
+        out += `<text x="${gx+bw}" y="${H-50}" fill="${C.text}" font-size="11" text-anchor="middle">${esc(nm(row).replace("Gemini ", "G. "))}</text>`;
+        out += `<text x="${gx+bw}" y="${H-34}" fill="${C.dim}" font-size="10" text-anchor="middle">gap ${(row.raw_tis_pct-row.adjusted_tis_pct).toFixed(1)}</text>`;
+      });
+      out += `<text x="${W-152}" y="28" fill="${C.jungle}" font-size="12">Raw TIS</text><text x="${W-82}" y="28" fill="${C.lichen}" font-size="12">Adjusted</text></svg>`;
+      return out;
+    }
+
+    function renderScope() {
+      const mammalSpeciesCount = DATA.scope.mammal_species_count ?? (DATA.scope.species_count - DATA.scope.bird_species_count);
+      const cards = [
+        ["Events compared", DATA.scope.event_count],
+        ["Species", DATA.scope.species_count],
+        ["Bird / mammal species", { bird: DATA.scope.bird_species_count, mammal: mammalSpeciesCount }],
+        ["Countries", DATA.scope.countries_count]
+      ];
+      document.getElementById("scope-cards").innerHTML = cards.map(([l,v]) => `<div class="metric">${
+        typeof v === "object"
+          ? `<div style="display:flex;justify-content:space-between;gap:14px"><div><div class="v">${v.bird}</div><div class="l">Bird species</div></div><div style="text-align:right"><div class="v">${v.mammal}</div><div class="l">Mammal species</div></div></div>`
+          : `<div class="v">${v}</div><div class="l">${esc(l)}</div>`
+      }</div>`).join("");
+    }
+
+    function renderTable() {
+      const rows = DATA.rows;
+      const best = rows.filter(r => r.is_vlm).sort((a,b) => b.adjusted_tis_pct - a.adjusted_tis_pct)[0];
+      document.getElementById("table").innerHTML = `<table><thead><tr><th>Model</th><th>Species acc.</th><th>Raw TIS</th><th>Adjusted TIS</th><th>Macro F1</th><th>Halluc.</th></tr></thead><tbody>${rows.map(r => `<tr><td style="border-left:3px solid ${colour(r)}"><span class="model">${esc(nmStar(r))}</span>${r===best ? '<span class="best">strongest</span>' : ''}<span class="route">${esc(r.route_group)} / ${r.runs} run${r.runs>1?'s':''}</span></td><td>${pct(r.species_accuracy_pct)}</td><td class="muted">${pct(r.raw_tis_pct)}</td><td>${pct(r.adjusted_tis_pct)}</td><td class="muted">${num(r.macro_f1, 3)}</td><td class="muted">${num(r.hallucinations, 0)}</td></tr>`).join("")}</tbody></table>`;
+    }
+
+    function boot() {
+      document.getElementById("year").textContent = new Date().getFullYear();
+      document.getElementById("status").textContent = `${DATA.rows.length} routes / ${DATA.scope.event_count} events / ${DATA.scope.species_count} species / ${DATA.presentation_scope}`;
+      renderScope();
+      renderTable();
+      const rows = DATA.rows;
+      renderSpeciesSplit(rows);
+      document.getElementById("hall-chart").innerHTML = shell("Accuracy vs hallucinations", "Top-right = accurate and cautious. Routes with comparable hallucination counts only.", scatter(rows.filter(r => r.hallucinations != null), { title:"Accuracy vs hallucinations", xKey:"species_accuracy_pct", yKey:"hallucinations", xMin:25, xMax:50, plotXMin:24, xTicks:[25,30,35,40,45,50], yMin:0, yMax:200, plotYMin:-12, plotYMax:205, yTicks:[0,50,100,150,200], yFmt:(v)=>String(v), xLabel:"Species accuracy (better right)", yLabel:"Hallucinations (fewer top)", good:{ x0:38, x1:50, y0:0, y1:60, label:"Accurate and cautious" } }));
+      document.getElementById("cost-chart").innerHTML = shell("Accuracy vs cost", DATA.cost_note, scatter(rows, { title:"Accuracy vs cost", xKey:"species_accuracy_pct", yKey:"api_cost_per_1k_usd", xMin:25, xMax:50, plotXMin:24, xTicks:[25,30,35,40,45,50], yMin:0, yMax:6, plotYMin:-0.45, plotYMax:6.35, yTicks:[0,2,4,6], yFmt:(v)=>"$"+v.toFixed(0), xLabel:"Species accuracy (better right)", yLabel:"Indicative API cost / 1k events (cheaper top)", good:{ x0:38, x1:50, y0:0, y1:1, labelY:1.55, label:"Accurate and cheap" } }));
+      document.getElementById("radar-chart").innerHTML = shell("Gemini 3.5 Flash capability profile", "Wider spoke = stronger, normalised across VLM routes. Hallucination axis inverted (fewer = wider).", radar(rows));
+      document.getElementById("rawadj-chart").innerHTML = shell("Raw vs Adjusted TIS - VLM routes", "The gap is the penalty each route pays for confident wrong answers.", groupedBars(rows));
+      document.getElementById("adjtis-chart").innerHTML = shell("Adjusted TIS - VLM API routes only", "Safety-weighted score. Specialist and comparator rows are omitted here because Adjusted TIS is not directly comparable.", barChart(rows.filter(r => r.is_vlm), "adjusted_tis_pct", { title:"Adjusted TIS", max:50, axis:"Adjusted TIS (%) - safety-weighted, VLM API routes only" }));
+    }
+    boot();
+  </script>
+</body>
+</html>

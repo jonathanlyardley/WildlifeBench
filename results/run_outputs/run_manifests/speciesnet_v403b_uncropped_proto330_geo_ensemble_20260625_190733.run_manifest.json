@@ -1,0 +1,191 @@
+{
+  "schema_version": "wildlifebench.run_manifest.v1",
+  "run_id": "speciesnet_v403b_uncropped_proto330_geo_ensemble_20260625_190733",
+  "run_type": "speciesnet_benchmark",
+  "created_at": "2026-06-25T19:14:07Z",
+  "started_at": "2026-06-25T18:07:33Z",
+  "completed_at": "2026-06-25T19:14:07Z",
+  "model": {
+    "model_key": "speciesnet",
+    "api_model": "kaggle:google/speciesnet/pyTorch/v4.0.3b/1",
+    "provider": "local_cli",
+    "family": "speciesnet"
+  },
+  "api_route": {
+    "provider": "local_cli",
+    "backend": "speciesnet.scripts.run_model",
+    "endpoint": null,
+    "transport": "file paths passed to local SpeciesNet CLI"
+  },
+  "prompt": null,
+  "dataset": {
+    "dataset_dir": "data_package/model_inputs",
+    "dataset_fingerprint": {
+      "n_events": 330,
+      "n_frames": 1278,
+      "fingerprint_sha256": "7dc4f02d25bd74cae9a3cead944312c2efa56b3c47b4634a30d9e26cbe41584e"
+    }
+  },
+  "image_resolution": {
+    "policy": "native original camera-trap frames",
+    "scope": "SpeciesNet specialist baseline",
+    "details": "Timestamp overlays retained; SpeciesNet performs its own internal preprocessing.",
+    "image_source": "data_package/model_inputs"
+  },
+  "run_parameters": {
+    "run_label": "geo_ensemble",
+    "run_tag": "v403b_uncropped_proto330",
+    "timestamp": "20260625_190733",
+    "model_id_override": "kaggle:google/speciesnet/pyTorch/v4.0.3b/1",
+    "image_dir": "data_package/model_inputs",
+    "limit_events": null,
+    "geo": true,
+    "ensemble": true,
+    "species_geo_override": [],
+    "eu_geo_override": null,
+    "speciesnet_python": "<local_speciesnet_python_redacted>",
+    "speciesnet_runtime": {
+      "platform": "Windows-11-10.0.22631-SP0",
+      "python_executable": "<local_speciesnet_python_redacted>",
+      "python_version": "3.12.13",
+      "speciesnet_version": "5.0.5",
+      "query_method": "external_python_importlib_metadata"
+    },
+    "speciesnet_model_policy": {
+      "selected_model_id": "kaggle:google/speciesnet/pyTorch/v4.0.3b/1",
+      "detected_model_version": "v4.0.3b",
+      "variant_role": "full-image model",
+      "recommended_input": "uncropped/full-frame camera-trap images",
+      "package_version_to_prepare": "5.0.5",
+      "examples": {
+        "v4.0.3a": {
+          "model_id": "kaggle:google/speciesnet/pyTorch/v4.0.3a/1",
+          "role": "default always-crop model",
+          "recommended_input": "cropped or standard SpeciesNet default route"
+        },
+        "v4.0.3b": {
+          "model_id": "kaggle:google/speciesnet/pyTorch/v4.0.3b/1",
+          "role": "full-image model",
+          "recommended_input": "uncropped/full-frame camera-trap images"
+        }
+      },
+      "upstream_note": "Pinned explicit SpeciesNet model ID."
+    },
+    "image_package_policy": {
+      "image_dir": "data_package/model_inputs",
+      "input_policy": "uncropped/full-frame EXIF-stripped SpeciesNet runner package; private provenance stores source paths and source/export hashes",
+      "manifest_path": "data_package/model_inputs",
+      "event_set_id": "gbif_award_proto330_20260625",
+      "event_count": 330,
+      "species_count": 110,
+      "frame_count": 1278,
+      "country_counts": {
+        "Belgium": 105,
+        "Ecuador": 85,
+        "France": 4,
+        "Germany": 5,
+        "Luxembourg": 131
+      },
+      "manifest_image_policy": "full-frame uncropped JPEG re-exports from cropped_from_path or fallback source; EXIF and embedded metadata stripped; source paths and hashes retained privately"
+    },
+    "country_policy": {
+      "country_code_standard": "ISO 3166-1 alpha-3",
+      "runner_country_map": {
+        "Ecuador": "ECU",
+        "Belgium": "BEL",
+        "Luxembourg": "LUX",
+        "France": "FRA",
+        "Germany": "DEU"
+      },
+      "country_hint_sent": true,
+      "raw_metadata_country_code_counts": {
+        "BEL": 105,
+        "DEU": 5,
+        "ECU": 85,
+        "FRA": 4,
+        "LUX": 131
+      },
+      "effective_country_code_counts": {
+        "BEL": 105,
+        "DEU": 5,
+        "ECU": 85,
+        "FRA": 4,
+        "LUX": 131
+      },
+      "geo_overrides": {},
+      "note": "For geo_* runs the runner groups frames by country and passes --country to SpeciesNet. The country hint affects the ensemble/geofencing final prediction policy, not the underlying image bytes."
+    }
+  },
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "provider_request_ids": []
+  },
+  "cost": {
+    "total_usd": 0.0,
+    "source": "local_colab_or_local_cli",
+    "note": "SpeciesNet run has no LLM API token billing."
+  },
+  "trace": {
+    "langfuse": {
+      "enabled": false,
+      "trace_id": null,
+      "trace_url": null
+    }
+  },
+  "environment": {
+    "omitted_from_public_release": true,
+    "reason": "Raw runner environment and dirty-tree status were removed from the public review package."
+  },
+  "raw_result_files": [
+    {
+      "path": "results/full_proto330/speciesnet_v403b_uncropped_proto330_geo_ensemble_20260625_190733.json",
+      "exists": true,
+      "bytes": 984489,
+      "sha256": "58ca62b16205f241dea755569e10b64e45dd740e5e7baa281a83301588ec253d"
+    },
+    {
+      "path": "results/full_proto330/speciesnet_v403b_uncropped_proto330_geo_ensemble_20260625_190733_BEL_raw.json",
+      "exists": true,
+      "bytes": 660361,
+      "sha256": "ebb99f021dc1c85fabe565f9081a50f122aa1714ec6fa4731f2255b30faed09c"
+    },
+    {
+      "path": "results/full_proto330/speciesnet_v403b_uncropped_proto330_geo_ensemble_20260625_190733_DEU_raw.json",
+      "exists": true,
+      "bytes": 13233,
+      "sha256": "30480f6f29426cac26cb547d762a2c282cb72ca51035b4524c347dec37cfb131"
+    },
+    {
+      "path": "results/full_proto330/speciesnet_v403b_uncropped_proto330_geo_ensemble_20260625_190733_ECU_raw.json",
+      "exists": true,
+      "bytes": 502180,
+      "sha256": "747417e6835888863835eae2dde46a7438279a477956923a9229894d55bf9ae5"
+    },
+    {
+      "path": "results/full_proto330/speciesnet_v403b_uncropped_proto330_geo_ensemble_20260625_190733_FRA_raw.json",
+      "exists": true,
+      "bytes": 14342,
+      "sha256": "b873305a8631af30d9ec2228babbbae8dd866c378485c1cf7d2c933a52478b4d"
+    },
+    {
+      "path": "results/full_proto330/speciesnet_v403b_uncropped_proto330_geo_ensemble_20260625_190733_LUX_raw.json",
+      "exists": true,
+      "bytes": 440869,
+      "sha256": "54bea70df23645fbde49f990cba474a24d5fcd639cc911d031383ed31a6cba50"
+    }
+  ],
+  "extra": {
+    "raw_cli_output_count": 5,
+    "summary_file": "results/full_proto330/speciesnet_summary_v403b_uncropped_proto330_20260625_190733.txt",
+    "speciesnet_runtime": {
+      "platform": "Windows-11-10.0.22631-SP0",
+      "python_executable": "<local_speciesnet_python_redacted>",
+      "python_version": "3.12.13",
+      "speciesnet_version": "5.0.5",
+      "query_method": "external_python_importlib_metadata"
+    },
+    "dry_run": false
+  }
+}
