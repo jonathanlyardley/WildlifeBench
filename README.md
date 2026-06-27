@@ -1,6 +1,4 @@
 ## Practical summary
-
-- GitHub staging URL: https://github.com/jonathanlyardley/WildlifeBench (private staging - to be made public after final release checks).
 - Hugging Face image/dataset repository: https://huggingface.co/datasets/JonathanYardley/wildlifebench-gbif-ebbe-2026-data
 - The cropped/uncropped 246 camera-trap bursts / 82 species JPEG media live here, not in this GitHub repo.
 - Media package: 2,010 cropped/uncropped JPEG derivatives with per-media attribution, licence URLs, EXIF-stripping notes and checksums, hosted on the Hugging Face dataset above.
